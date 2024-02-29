@@ -1,0 +1,27 @@
+﻿@functions {
+    public bool IsCurrentPage(string pageName)
+    {
+        var currentPage = ViewContext.RouteData.Values["action"]?.ToString();
+        return string.Equals(currentPage, pageName, StringComparison.OrdinalIgnoreCase);
+    }
+}
+
+
+<div class="container">
+    <a class="navbar-brand" href="Index">Student<span>Rental</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item @(IsCurrentPage("Index") ? "active" : "")"><a href="Index" class="nav-link">Home</a></li>
+            <li class="nav-item @(IsCurrentPage("About") ? "active" : "")"><a href="About" class="nav-link">About</a></li>
+            <li class="nav-item @(IsCurrentPage("Services") ? "active" : "")"><a href="Services" class="nav-link">Services</a></li>
+            <li class="nav-item @(IsCurrentPage("Pricing") ? "active" : "")"><a href="Pricing" class="nav-link">Pricing</a></li>
+            <li class="nav-item @(IsCurrentPage("Car") ? "active" : "")"><a href="Car" class="nav-link">Cars</a></li>
+            <li class="nav-item @(IsCurrentPage("Blog") ? "active" : "")"><a href="Blog" class="nav-link">Blog</a></li>
+            <li class="nav-item @(IsCurrentPage("Contact") ? "active" : "")"><a href="Contact" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
+</div>
