@@ -277,9 +277,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cars.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\LoginData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -427,6 +432,7 @@
     <Content Include="Views\Home\Services.cshtml" />
     <Content Include="Views\Home\BlogSingle.cshtml" />
     <Content Include="Views\Home\CarSingle.cshtml" />
+    <Content Include="Views\Login\LogIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -436,7 +442,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Product\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RentCars.BusinessLogic\RentCars.BusinessLogic.csproj">
+      <Project>{857beecf-9827-4c01-a446-1cc6763ac98d}</Project>
+      <Name>RentCars.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RentCars.Domain\RentCars.Domain.csproj">
+      <Project>{1d368a18-ce8e-4eee-b6a7-b7aea83e828f}</Project>
+      <Name>RentCars.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

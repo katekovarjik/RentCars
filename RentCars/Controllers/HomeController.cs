@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RentCars.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,12 +26,35 @@ namespace RentCars.Controllers
 
         public ActionResult Car()
         {
-            return View();
+            if (Session["UserName"] != null)
+            {
+                ViewData["UserName"] = Session["UserName"];
+            }
+            Car car = new Car();
+            car.Name = "WWW";
+            car.Cars = new List<string> { "Grand Sedan Cheverolet", "Range Rover Subaru", "Mercedes Grand Sedan Cheverolet" };
+            return View(car);
+        }
+        [HttpPost]
+        public ActionResult Car(string btn)
+        {
+            return RedirectToAction("CarSingle", "Home", new {@p = btn});
+
         }
 
         public ActionResult Contact()
         {
-            return View();
+            Contact user1 = new Contact();
+            user1.UserName = "Test";
+            user1.Email = "Test";
+            user1.Subject = "Test";
+            user1.Message = "TestM";
+            return View(user1);
+        }
+
+        [HttpPost]
+        public ActionResult Check(string buttom) { 
+            return RedirectToAction("Index", "Home", new { buttom });
         }
 
         public ActionResult Pricing()
@@ -51,5 +75,7 @@ namespace RentCars.Controllers
         {
             return View();
         }
+
+      
     }
 }

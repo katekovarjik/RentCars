@@ -1,0 +1,51 @@
+﻿
+
+@model RentCars.Models.LoginData
+
+
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+            <span class="subheading">Welcome </span>
+            <h2 class="mb-2">Log in</h2>
+        </div>
+    </div>
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="row justify-content-center">
+        <form class="my-form" method="post" action="LogIn">
+
+            @{
+                //<form asp-action="MyAction" method="post">
+                //<input type="text" name="Property1" />
+                //<input type="text" name="Property2" />
+
+                <p>
+                    <label for="username">User Name:</label>
+                    <input type="text" id="username" name="UseName" required>
+                </p>
+                <p>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="Password" required>
+                </p> 
+            }
+
+            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                <div class="services w-100 text-center">
+                    <button class="text w-100">
+                        <h3 class="heading mb-2">Log in</h3>
+                    </button>
+                </div>
+            </div>
+            <br />
+        </form>
+    </div>
+

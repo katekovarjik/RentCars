@@ -1,4 +1,5 @@
-﻿@functions {
+﻿
+@functions {
     public bool IsCurrentPage(string pageName)
     {
         var currentPage = ViewContext.RouteData.Values["action"]?.ToString();
@@ -21,7 +22,18 @@
             <li class="nav-item @(IsCurrentPage("Pricing") ? "active" : "")"><a href="Pricing" class="nav-link">Pricing</a></li>
             <li class="nav-item @(IsCurrentPage("Car") ? "active" : "")"><a href="Car" class="nav-link">Cars</a></li>
             <li class="nav-item @(IsCurrentPage("Blog") ? "active" : "")"><a href="Blog" class="nav-link">Blog</a></li>
-            <li class="nav-item @(IsCurrentPage("Contact") ? "active" : "")"><a href="Contact" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="@Url.Action("Contact", "Home" )" class="nav-link">Contact</a></li>
+            <li class="nav-item">
+                @if (ViewData["UserName"] != null)
+                {
+                    <span class="nav-link">Hello, @ViewData["UserName"]</span>
+
+                }
+                else
+                {
+                    <a href="@Url.Action("LogIn", "Login" )" class="nav-link">Log In</a>
+                }
+                    </li>
         </ul>
     </div>
 </div>
