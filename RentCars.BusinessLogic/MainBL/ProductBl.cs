@@ -17,5 +17,11 @@ namespace RentCars.BusinessLogic.MainBL
         {
             return ProductActionGetToList();
         }
+
+        public ProductDataModel GetSingleProduct(int id) 
+        {
+            return GetSingleAction(id); 
+        }
+        
     }
 }

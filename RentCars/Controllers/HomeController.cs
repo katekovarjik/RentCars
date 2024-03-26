@@ -26,10 +26,7 @@ namespace RentCars.Controllers
 
         public ActionResult Car()
         {
-            if (Session["UserName"] != null)
-            {
-                ViewData["UserName"] = Session["UserName"];
-            }
+            
             Car car = new Car();
             car.Name = "WWW";
             car.Cars = new List<string> { "Grand Sedan Cheverolet", "Range Rover Subaru", "Mercedes Grand Sedan Cheverolet" };

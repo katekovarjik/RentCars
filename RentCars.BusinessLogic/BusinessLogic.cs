@@ -19,5 +19,9 @@ namespace RentCars.BusinessLogic
         {
             return new ProductBl();
         }
+        public ICalculation GetCalculationBL()
+        {
+            return new CalculationBL();
+        }
     }
 }

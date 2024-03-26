@@ -276,6 +276,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -284,7 +285,10 @@
     </Compile>
     <Compile Include="Models\Cars.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\DaysData.cs" />
     <Compile Include="Models\LoginData.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ProductPresentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +437,8 @@
     <Content Include="Views\Home\BlogSingle.cshtml" />
     <Content Include="Views\Home\CarSingle.cshtml" />
     <Content Include="Views\Login\LogIn.cshtml" />
+    <Content Include="Views\Product\Products.cshtml" />
+    <Content Include="Views\Product\Calculation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -442,8 +448,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Calculation\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RentCars.BusinessLogic\RentCars.BusinessLogic.csproj">

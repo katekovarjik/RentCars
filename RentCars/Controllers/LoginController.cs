@@ -42,6 +42,7 @@ namespace RentCars.Controllers
 
             };
             RResponseData responce = _session.UserLoginAction(uLoginData);
+
            if(responce != null && responce.CurrentUser.Password == uLoginData.Password)
             {
                 Session["UserName"] = responce.CurrentUser.UserName;

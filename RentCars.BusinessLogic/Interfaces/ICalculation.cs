@@ -1,4 +1,4 @@
-﻿using RentCars.Domain.Entities.Product;
+﻿using RentCars.Domain.Entities.Calculation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace RentCars.BusinessLogic.Interfaces
 {
-    public interface IProduct
+    public interface ICalculation
     {
-        ProductDataModel GetProductsToList();
-        ProductDataModel GetSingleProduct(int id); 
+        int CalculateDays(CalcDataDays days);
+       
     }
-
-    
 }

@@ -1,6 +1,7 @@
 ﻿using RentCars.BusinessLogic.Core.Levels;
 using RentCars.BusinessLogic.Interfaces;
 using RentCars.Domain.Entities.GeneralResponses;
+using RentCars.Domain.Entities.Product;
 using RentCars.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace RentCars.BusinessLogic.MainBL
         {
             return UALSessionCheck(data);  // return true or false depends on valid or not
         }
+       
     }
 }
