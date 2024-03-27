@@ -18,9 +18,10 @@ namespace RentCars.BusinessLogic.MainBL
             decimal difference = days.returnDay - days.takeDay;
 
             // Количество дней в разнице
-            int daysDifference = (int)difference.TotalDays;
+            //int daysDifference = (int)difference.TotalDays;
 
-            return daysDifference;
+            // return daysDifference;
+            return 0;
         }
     }
 }
