@@ -35,6 +35,7 @@ namespace RentCars.Controllers
 
             var uLoginData = new UserLoginData
             {
+                
                 Credential = data.UserName, // берем данные которые ввел ползователь с ваб-а 
                 Password = data.Password,
                 IP = "",

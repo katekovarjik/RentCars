@@ -24,9 +24,9 @@
             <li class="nav-item @(IsCurrentPage("Blog") ? "active" : "")"><a href="Blog" class="nav-link">Blog</a></li>
             <li class="nav-item"><a href="@Url.Action("Contact", "Home" )" class="nav-link">Contact</a></li>
             <li class="nav-item">
-                @if (ViewData["UserName"] != null)
+                @if (Session["UserName"] != null)
                 {
-                    <span class="nav-link">Hello, @ViewData["UserName"]</span>
+                    <span class="nav-link">Hello, @Session["UserName"]</span>
 
                 }
                 else
