@@ -30,30 +30,37 @@ namespace RentCars.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(LoginData data) //получили пароль пользователя из View
-        {
 
+        public ActionResult LogIn(LoginData data)
+        {
+            // Создаем объект UserLoginData для передачи данных в метод проверки аутентификации
             var uLoginData = new UserLoginData
             {
-                
-                Credential = data.UserName, // берем данные которые ввел ползователь с ваб-а 
-                Password = data.Password,
-                IP = "",
-                FirstLoginTime = DateTime.Now,
-
+                Credential = data.UserName, // Получаем имя пользователя из формы входа
+                Password = data.Password, // Получаем пароль пользователя из формы входа
+                IP = "", // Можно добавить IP-адрес пользователя, если необходимо
+                FirstLoginTime = DateTime.Now // Записываем текущее время как время первого входа
             };
+
+            // Вызываем метод для проверки аутентификации пользователя
             RResponseData responce = _session.UserLoginAction(uLoginData);
 
-           if(responce != null && responce.CurrentUser.Password == uLoginData.Password)
+            // Проверяем, что ответ не равен null и пароль из ответа совпадает с введенным пользователем паролем
+            if (responce != null && responce.CurrentUser != null && responce.CurrentUser.Password == uLoginData.Password)
             {
+                // Если аутентификация прошла успешно, сохраняем имя пользователя в сессии
                 Session["UserName"] = responce.CurrentUser.UserName;
+                // Перенаправляем пользователя на страницу с автомобилями
                 return RedirectToAction("Car", "Home");
             }
-            ModelState.AddModelError("", "Ошибка аутентификации. Пожалуйста, проверьте свои учетные данные и попробуйте снова.");
-
-            return View();
-            
-            
+            else
+            {
+                // Если аутентификация не удалась, добавляем сообщение об ошибке в модель состояния
+                ModelState.AddModelError("", "Ошибка аутентификации. Пожалуйста, проверьте свои учетные данные и попробуйте снова.");
+                // Возвращаем представление с формой входа, чтобы пользователь мог попробовать снова
+                return View();
+            }
         }
+
     }
 }
