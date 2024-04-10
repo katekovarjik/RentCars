@@ -5,6 +5,7 @@ using RentCars.Domain.Entities.User;
 using RentCars.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,14 +29,29 @@ namespace RentCars.Controllers
         }
 
         [HttpPost]
-        public ActionResult Calculation(DaysData data)
+        public ActionResult Index(DaysData data)
         {
-            var calcData = new CalcDataDays
+            var calcData = new CalcDataDays();
+            try
             {
-                takeDay = data.takeDayPr,
-                returnDay = data.returnDayPr,
-            };
-            int responce = _calculation.CalculateDays(calcData);
+                calcData.takeDay = DateTime.ParseExact(data.PickUpDate, "M/d/yyyy", CultureInfo.InvariantCulture);
+                calcData.returnDay = DateTime.ParseExact(data.DropOffDate, "M/d/yyyy", CultureInfo.InvariantCulture);
+            }
+            catch (FormatException ex)
+            {
+                // Обработка ошибки парсинга даты
+                // Например, возврат пользователю сообщения об ошибке
+                ModelState.AddModelError("", "Invalid date format. Please enter dates in the format 'M/d/yyyy'.");
+                return View();
+            }
+
+            // Продолжайте с вашей логикой
+            int response = _calculation.CalculateDays(calcData);
+
+            if (response != 0)
+            {
+                return RedirectToAction("Car", "Home");
+            }
             return View();
         }
 

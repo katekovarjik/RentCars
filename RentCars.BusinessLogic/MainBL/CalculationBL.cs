@@ -15,9 +15,9 @@ namespace RentCars.BusinessLogic.MainBL
         public int CalculateDays(CalcDataDays days)
         {
             // логика вычесть дни 
-            decimal difference = days.returnDay - days.takeDay;
+            TimeSpan difference = days.returnDay.Subtract(days.takeDay);
 
-            // Количество дней в разнице
+            // Получаем количество дней в разнице
             int daysDifference = (int)difference.TotalDays;
 
             return daysDifference;

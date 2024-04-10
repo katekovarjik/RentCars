@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,7 +47,9 @@
     <Compile Include="Entities\Product\DB\Product.cs" />
     <Compile Include="Entities\Product\ProductDataModel.cs" />
     <Compile Include="Entities\User\DB\DBUser.cs" />
+    <Compile Include="Entities\User\UDBTable.cs" />
     <Compile Include="Entities\User\UserLoginData.cs" />
+    <Compile Include="Enum\Roles\URole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,8 +58,6 @@
       <Name>RentCars.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enum\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
