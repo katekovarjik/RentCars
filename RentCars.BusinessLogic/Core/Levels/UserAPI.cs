@@ -1,9 +1,9 @@
-﻿using RentCars.Domain.Entities.GeneralResponses;
+﻿using RentCars.BusinessLogic.DBModel.Seed;
+using RentCars.Domain.Entities.GeneralResponses;
 using RentCars.Domain.Entities.Product;
 using RentCars.Domain.Entities.Product.DB;
 using RentCars.Domain.Entities.User;
-using RentCars.Domain.Entities.User.DB;
-
+using RentCars.Domain.Enum.Roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,23 +14,49 @@ namespace RentCars.BusinessLogic.Core.Levels
 {
     public class UserAPI
     {
-        internal RResponseData UALSessionCheck(UserLoginData data)
+
+        public UserAPI()
         {
-
-            //db connection 
-            //select user from db
-            // if select valid or true
-            //return status = true
-
-            return new RResponseData { CurrentUser = new DBUser {UserName = "Olga",
-                Email = "olga.lutcenco@isa.utm.md" , 
-            Password = "12345"} };
         }
 
-        //______________________
-        //products
+        internal RResponseData UALSessionCheck(UserLoginData data)
+        {
+            UDbTable user;
 
-        internal ProductDataModel ProductActionGetToList()
+            using (var DbContext = new UserContext()) 
+          
+            {
+                user = DbContext.Users.FirstOrDefault(u => u.Name == data.Credential && u.Password == data.Password);
+            }
+
+
+            // Проверка, найден ли пользователь
+            if (user != null)
+            {
+                // Создание объекта RResponseData с данными текущего пользователя
+                return new RResponseData {
+                    Status = true,
+                    CurrentUser = user,
+                    };
+            }
+                // Создание объекта RResponseData с сообщением об ошибке
+            return new RResponseData { Status = false, ResponceMessage = "Invalid credentials" };
+            
+        }
+
+        //Register
+        private RResponseData UALRegisterUser(UserRegisterData data)
+        {
+            throw new NotImplementedException();
+        }
+     
+
+
+
+    //______________________
+    //products
+
+    internal ProductDataModel ProductActionGetToList()
         {
             var products = new List<Product>(); // list of products from DB
             ProductDataModel pr1 = new ProductDataModel();   // это для тренировки без бд
@@ -42,7 +68,7 @@ namespace RentCars.BusinessLogic.Core.Levels
 
         }
 
-        internal  ProductDataModel GetSingleAction(int id)
+        internal ProductDataModel GetSingleAction(int id)
         {
             // select from DB where id = id
             var product = new Product();
@@ -55,6 +81,44 @@ namespace RentCars.BusinessLogic.Core.Levels
                     Price = 110
                 }
             };*/
+        }
+
+
+        public bool IsUserNameExistAlready(string userName) 
+        {
+            UDbTable RegisterData;
+            using (var DbContext = new UserContext()) 
+            {
+                RegisterData = DbContext.Users.FirstOrDefault(a => a.UserName == userName);
+            }
+            if (RegisterData != null) 
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        public void CreateNewUser(UserRegisterData NewUser) 
+        {
+            var newUser = new UDbTable
+            {
+                Name= NewUser.UserName,
+                UserName = NewUser.UserName,
+                Email = NewUser.Email,
+                Password = NewUser.Password,
+                LastLogin = DateTime.Now,
+                LastIp = NewUser.IP,
+                Level = URole.User,
+            };
+
+            using (var DbContext = new UserContext())
+            {
+                DbContext.Users.Add(newUser);
+                DbContext.SaveChanges();
+
+
+            }
         }
 
 
