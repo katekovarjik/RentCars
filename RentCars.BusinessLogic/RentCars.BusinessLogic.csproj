@@ -55,12 +55,14 @@
     <Compile Include="Core\Levels\AdminApi.cs" />
     <Compile Include="Core\Levels\ModeratorAPI.cs" />
     <Compile Include="Core\Levels\UserAPI.cs" />
-    <Compile Include="DBModel\UserContent.cs" />
+    <Compile Include="DBModel\Seed\UserContext.cs" />
     <Compile Include="Interfaces\ICalculation.cs" />
     <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="MainBL\CalculationBL.cs" />
     <Compile Include="MainBL\ProductBl.cs" />
+    <Compile Include="MainBL\RegisterBL.cs" />
     <Compile Include="MainBL\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,9 +79,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DBModel\Seed\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

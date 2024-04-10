@@ -8,9 +8,10 @@ namespace RentCars.Domain.Enum.Roles
 {
     public enum URole
     {
-        None, 
-        User,
-        Admin, 
-        Moderator
+     None,
+     User,
+     Moderator,
+     Admin
+
     }
 }
