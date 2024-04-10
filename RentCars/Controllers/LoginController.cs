@@ -38,7 +38,7 @@ namespace RentCars.Controllers
             {
                 Credential = data.UserName, // Получаем имя пользователя из формы входа
                 Password = data.Password, // Получаем пароль пользователя из формы входа
-                IP = "", // Можно добавить IP-адрес пользователя, если необходимо
+                IP = Request.UserHostAddress, // Можно добавить IP-адрес пользователя, если необходимо
                 FirstLoginTime = DateTime.Now // Записываем текущее время как время первого входа
             };
 

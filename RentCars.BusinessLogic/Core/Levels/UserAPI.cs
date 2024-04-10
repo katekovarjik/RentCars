@@ -14,7 +14,6 @@ namespace RentCars.BusinessLogic.Core.Levels
 {
     public class UserAPI
     {
-        private readonly UserContext _dbContext;
 
         public UserAPI()
         {
@@ -27,7 +26,7 @@ namespace RentCars.BusinessLogic.Core.Levels
             using (var DbContext = new UserContext()) 
           
             {
-                user = _dbContext.Users.FirstOrDefault(u => u.Name == data.Credential && u.Password == data.Password);
+                user = DbContext.Users.FirstOrDefault(u => u.Name == data.Credential && u.Password == data.Password);
             }
 
 
@@ -36,6 +35,7 @@ namespace RentCars.BusinessLogic.Core.Levels
             {
                 // Создание объекта RResponseData с данными текущего пользователя
                 return new RResponseData {
+                    Status = true,
                     CurrentUser = user,
                     };
             }
