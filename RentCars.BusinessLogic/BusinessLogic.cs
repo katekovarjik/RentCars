@@ -23,5 +23,11 @@ namespace RentCars.BusinessLogic
         {
             return new CalculationBL();
         }
+
+        public IRegister GetRegisterBL()
+        {
+            return new RegisterBL();
+        }
     }
+
 }

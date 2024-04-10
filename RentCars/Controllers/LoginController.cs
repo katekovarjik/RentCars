@@ -47,6 +47,7 @@ namespace RentCars.Controllers
 
             // Проверяем, что ответ не равен null и пароль из ответа совпадает с введенным пользователем паролем
             if (responce != null && responce.CurrentUser != null && responce.CurrentUser.Password == uLoginData.Password)
+
             {
                 // Если аутентификация прошла успешно, сохраняем имя пользователя в сессии
                 Session["UserName"] = responce.CurrentUser.UserName;
