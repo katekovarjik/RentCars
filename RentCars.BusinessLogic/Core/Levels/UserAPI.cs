@@ -44,7 +44,7 @@ namespace RentCars.BusinessLogic.Core.Levels
             
         }
 
-        //Register
+        //Login
         private RResponseData UALRegisterUser(UserRegisterData data)
         {
             throw new NotImplementedException();
