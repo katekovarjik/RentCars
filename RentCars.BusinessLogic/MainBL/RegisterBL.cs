@@ -39,10 +39,5 @@ namespace RentCars.BusinessLogic.MainBL
             CreateNewUser(NewUser);
         }
 
-        public void RegisterUser(UserRegisterData userData)
-        {
-            // Логика регистрации пользователя в базе данных
-            // Создание нового пользователя на основе данных из userData и добавление его в базу данных
-        }
     }
 }

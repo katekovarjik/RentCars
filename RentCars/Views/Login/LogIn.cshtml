@@ -1,49 +1,88 @@
-﻿
-
-@model RentCars.Models.LoginData
-
-
+﻿@model RentCars.Models.LoginData
 
 @{
-    ViewBag.Title = "Registration";
+    ViewBag.Title = "Log in";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    body {
+        background-color: #f8f9fa; /* Цвет фона */
+        margin-bottom: 500px; /* Отступ снизу для контейнера */
+    }
+
+    .card {
+        margin-top: 50px; /* Отступ сверху для карточки */
+        border: none; /* Убираем границу у карточки */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+    }
+
+    .card-header {
+        background-color: #343a40; /* Цвет фона заголовка карточки */
+        color: #fff; /* Цвет текста заголовка карточки */
+        border-bottom: 1px solid #dee2e6; /* Граница снизу заголовка карточки */
+    }
+
+    .form-control {
+        border-color: #000000; /* Черный цвет рамки полей ввода */
+        color: #000000; /* Черный цвет текста в полях ввода */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Цвет фона кнопки "Log in" */
+        border-color: #007bff; /* Цвет рамки кнопки "Log in" */
+        color: #000000; /* Черный цвет текста на кнопке "Log in" */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Цвет фона кнопки при наведении */
+            border-color: #0056b3; /* Цвет рамки кнопки при наведении */
+            color: #000000; /* Черный цвет текста при наведении на кнопку */
+        }
+
+    .btn-outline-primary {
+        color: #007bff; /* Цвет текста ссылки "Register" */
+        border-color: #007bff; /* Цвет рамки ссылки "Register" */
+    }
+
+        .btn-outline-primary:hover {
+            color: #0056b3; /* Цвет текста ссылки при наведении */
+            border-color: #0056b3; /* Цвет рамки ссылки при наведении */
+        }
+
+    .mt-3 {
+        margin-top: 15px; /* Отступ сверху для блока с текстом и ссылкой */
+    }
+</style>
+
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-            <span class="subheading">Welcome </span>
-            <h2 class="mb-2">Log in</h2>
-        </div>
-    </div>
-</div>   
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Log In</div>
 
-    <div class="row justify-content-center">
-        <form class="my-form" method="post" action="LogIn">
+                <div class="card-body">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-            @{
-                //<form asp-action="MyAction" method="post">
-                //<input type="text" name="Property1" />
-                //<input type="text" name="Property2" />
+                    <form class="my-form" method="post" action="LogIn">
+                        <div class="form-group">
+                            <label for="username">User Name:</label>
+                            <input type="text" id="username" name="UserName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="Password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                    </form>
 
-                <p>
-                    <label for="username">User Name:</label>
-                    <input type="text" id="username" name="UserName" required>
-                </p>
-                <p>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="Password" required>
-                </p> 
-            }
-
-            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                <div class="services w-100 text-center">
-                    <button class="text w-100"> 
-                        <h3 class="heading mb-2">Log in</h3>
-                    </button>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account yet?</p>
+                        <a href="@Url.Action("Register", "Register" )" class="btn btn-outline-primary btn-block">Register</a>
+                    </div>
                 </div>
             </div>
-            <br />
-        </form>
+        </div>
     </div>
-
+</div>

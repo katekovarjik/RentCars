@@ -52,7 +52,7 @@ namespace RentCars.Controllers
                 // Если аутентификация прошла успешно, сохраняем имя пользователя в сессии
                 Session["UserName"] = responce.CurrentUser.UserName;
                 // Перенаправляем пользователя на страницу с автомобилями
-                return RedirectToAction("Car", "Home");
+                return RedirectToAction("CarsAdmin", "CarsAdmin");
             }
             else
             {
