@@ -47,7 +47,6 @@ public class RegisterController : Controller
 
             };
 
-
             _register.CreateUser(registerInfo);
             // Перенаправляем пользователя на страницу входа после успешной регистрации
             return RedirectToAction("LogIn", "Login");

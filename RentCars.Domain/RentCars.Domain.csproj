@@ -55,6 +55,7 @@
     <Compile Include="Entities\GeneralResponses\RResponseData.cs" />
     <Compile Include="Entities\Product\DB\Product.cs" />
     <Compile Include="Entities\Product\ProductDataModel.cs" />
+    <Compile Include="Entities\User\DB\ProductDBTable.cs" />
     <Compile Include="Entities\User\UDbTable.cs" />
     <Compile Include="Entities\User\UserLoginData.cs" />
     <Compile Include="Entities\User\UserRegisterData.cs" />
@@ -71,9 +72,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\User\DB\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

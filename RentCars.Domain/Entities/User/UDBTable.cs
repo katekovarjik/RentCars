@@ -12,8 +12,8 @@ namespace RentCars.Domain.Entities.User
     public class UDbTable
     {
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]         // уникальный идентификатор каждой записи 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //бд создает уникальное значение
         public int Id { get; set; }
 
         [Required]
