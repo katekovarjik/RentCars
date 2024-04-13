@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RentCars.BusinessLogic.DBModel.Seed;
+using RentCars.Domain.Entities.Product.DB;
 
 namespace RentCars.Controllers
 {
@@ -15,19 +17,36 @@ namespace RentCars.Controllers
     {
 
         private readonly IAddCar _addcar;
+        private readonly ProductContext _productcontext;
 
         public CarsAdminController() 
         {
             var logicBl = new BusinessLogic.BusinessLogic();
             _addcar = logicBl.GetAddCarBL();
         }
+        
+
+        public CarsAdminController(ProductContext productcontext)
+        {
+            _productcontext = productcontext;
+        }
 
 
         // GET: CarsAdmin
         public ActionResult CarsAdmin()
         {
-            return View();
+            List<ProductDbTable> cars;
+
+            using (var dbContext = new ProductContext())
+            {
+                cars = dbContext.Products.ToList();
+            }
+
+            return View(cars);
         }
+    
+
+
 
         public ActionResult AddCar() 
         {
