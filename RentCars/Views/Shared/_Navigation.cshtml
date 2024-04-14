@@ -1,5 +1,4 @@
-﻿
-@functions {
+﻿@functions {
     public bool IsCurrentPage(string pageName)
     {
         var currentPage = ViewContext.RouteData.Values["action"]?.ToString();
@@ -7,6 +6,22 @@
     }
 }
 
+<style>
+    .navbar-nav .nav-link {
+        color: black !important; /* Черный цвет текста с применением !important */
+    }
+</style>
+
+<style>
+    .navbar-nav .nav-link {
+        color: black !important; /* Черный цвет текста */
+        transition: color 0.3s; /* Плавное изменение цвета */
+    }
+
+        .navbar-nav .nav-link:hover {
+            color: blue !important; /* Синий цвет при наведении */
+        }
+</style>
 
 <div class="container">
     <a class="navbar-brand" href="Index">Student<span>Rental</span></a>
@@ -27,13 +42,12 @@
                 @if (Session["UserName"] != null)
                 {
                     <span class="nav-link">Hello, @Session["UserName"]</span>
-
                 }
                 else
                 {
                     <a href="@Url.Action("LogIn", "Login" )" class="nav-link">Log In</a>
                 }
-                    </li>
+            </li>
         </ul>
     </div>
 </div>

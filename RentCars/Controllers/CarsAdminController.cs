@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RentCars.BusinessLogic.DBModel.Seed;
+using RentCars.Domain.Entities.Product.DB;
 
 namespace RentCars.Controllers
 {
@@ -21,13 +23,40 @@ namespace RentCars.Controllers
             var logicBl = new BusinessLogic.BusinessLogic();
             _addcar = logicBl.GetAddCarBL();
         }
-
+        
 
         // GET: CarsAdmin
         public ActionResult CarsAdmin()
         {
-            return View();
+            List<ProductDbTable> cars;
+
+            using (var dbContext = new ProductContext())
+            {
+                cars = dbContext.Products.ToList();
+            }
+
+            return View(cars);
         }
+
+        [HttpPost]
+        public ActionResult DeleteCar(int carId)
+        {
+            using (var dbContext = new ProductContext())
+            {
+                var carToDelete = dbContext.Products.FirstOrDefault(c => c.Id == carId);
+                if (carToDelete != null)
+                {
+                    dbContext.Products.Remove(carToDelete);
+                    dbContext.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("CarsAdmin"); // Перенаправление на страницу со списком товаров после удаления
+        }
+
+
+
+
 
         public ActionResult AddCar() 
         {
@@ -53,7 +82,7 @@ namespace RentCars.Controllers
 
                 _addcar.CreateNewProduct(CarInfo);
                 // Перенаправляем пользователя на страницу входа после успешной регистрации
-                return RedirectToAction("LogIn", "Login");
+                return RedirectToAction("CarsAdmin", "CarsAdmin");
             }
 
             // Если модель не валидна, возвращаем представление с ошибками
