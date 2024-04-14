@@ -17,6 +17,7 @@
         .registration-form label {
             display: block;
             margin-bottom: 5px;
+            color: #000; /* черный цвет для текста меток */
         }
 
         .registration-form input[type="text"],
@@ -25,13 +26,13 @@
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #000; /* черная рамка для полей ввода */
             border-radius: 3px;
         }
 
         .registration-form button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #000; /* черный цвет фона для кнопки */
+            color: #fff; /* белый цвет текста для кнопки */
             border: none;
             padding: 10px 20px;
             border-radius: 3px;
@@ -39,34 +40,32 @@
         }
 
             .registration-form button[type="submit"]:hover {
-                background-color: #0056b3;
+                background-color: #333; /* темно-серый при наведении на кнопку */
             }
 </style>
 
 <h2>Register</h2>
 
 <form class="registration-form" asp-controller="Register" asp-action="Register" method="post">
-    @{ 
     <div>
-        <label asp-for="UserName"></label>
+        <label asp-for="UserName">User Name:</label>
         <input type="text" asp-for="UserName" name="UserName" />
         <span asp-validation-for="UserName"></span>
     </div>
     <div>
-        <label asp-for="Email"></label>
+        <label asp-for="Email">Email Address:</label>
         <input type="email" asp-for="Email" name="Email" />
         <span asp-validation-for="Email"></span>
     </div>
     <div>
-        <label asp-for="Password"></label>
+        <label asp-for="Password">Password:</label>
         <input type="password" asp-for="Password" name="Password" />
         <span asp-validation-for="Password"></span>
     </div>
     <div>
-        <label asp-for="ConfirmPassword"></label>
+        <label asp-for="ConfirmPassword">Confirm Password:</label>
         <input type="password" asp-for="ConfirmPassword" name="ConfirmPassword" />
         <span asp-validation-for="ConfirmPassword"></span>
     </div>
     <button type="submit">Register</button>
-        }
 </form>

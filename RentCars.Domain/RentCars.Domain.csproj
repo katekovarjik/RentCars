@@ -53,7 +53,9 @@
   <ItemGroup>
     <Compile Include="Entities\Calculation\CalcDataDays.cs" />
     <Compile Include="Entities\GeneralResponses\RResponseData.cs" />
+    <Compile Include="Entities\Product\CarProductData.cs" />
     <Compile Include="Entities\Product\DB\Product.cs" />
+    <Compile Include="Entities\Product\DB\ProductDbTable.cs" />
     <Compile Include="Entities\Product\ProductDataModel.cs" />
     <Compile Include="Entities\User\DB\ProductDBTable.cs" />
     <Compile Include="Entities\User\UDbTable.cs" />

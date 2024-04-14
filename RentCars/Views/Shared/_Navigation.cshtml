@@ -16,12 +16,12 @@
 
     <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item @(IsCurrentPage("Index") ? "active" : "")"><a href="Index" class="nav-link">Home</a></li>
-            <li class="nav-item @(IsCurrentPage("About") ? "active" : "")"><a href="About" class="nav-link">About</a></li>
-            <li class="nav-item @(IsCurrentPage("Services") ? "active" : "")"><a href="Services" class="nav-link">Services</a></li>
-            <li class="nav-item @(IsCurrentPage("Pricing") ? "active" : "")"><a href="Pricing" class="nav-link">Pricing</a></li>
-            <li class="nav-item @(IsCurrentPage("Car") ? "active" : "")"><a href="Car" class="nav-link">Cars</a></li>
-            <li class="nav-item @(IsCurrentPage("Blog") ? "active" : "")"><a href="Blog" class="nav-link">Blog</a></li>
+            <li class="nav-item @(IsCurrentPage("Index") ? "active" : "")"><a href="@Url.Action("Index", "Home" )" class="nav-link">Home</a></li>
+            <li class="nav-item @(IsCurrentPage("About") ? "active" : "")"><a href="@Url.Action("About", "Home" )" class="nav-link">About</a></li>
+            <li class="nav-item @(IsCurrentPage("Services") ? "active" : "")"><a href="@Url.Action("Services", "Home" )" class="nav-link">Services</a></li>
+            <li class="nav-item @(IsCurrentPage("Pricing") ? "active" : "")"><a href="@Url.Action("Pricing", "Home" )" class="nav-link">Pricing</a></li>
+            <li class="nav-item @(IsCurrentPage("Car") ? "active" : "")"><a href="@Url.Action("CarsAdmin", "CarsAdmin" )" class="nav-link">Cars</a></li>
+            <li class="nav-item @(IsCurrentPage("Blog") ? "active" : "")"><a href="@Url.Action("Blog", "Home" )" class="nav-link">Blog</a></li>
             <li class="nav-item"><a href="@Url.Action("Contact", "Home" )" class="nav-link">Contact</a></li>
             <li class="nav-item">
                 @if (Session["UserName"] != null)

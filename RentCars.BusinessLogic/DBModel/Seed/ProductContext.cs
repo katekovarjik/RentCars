@@ -1,4 +1,5 @@
-﻿using RentCars.Domain.Entities.User;
+﻿using RentCars.Domain.Entities.Product.DB;
+using RentCars.Domain.Entities.User;
 using RentCars.Domain.Entities.User.DB;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace RentCars.BusinessLogic.DBModel.Seed
 {
+
+
     public class ProductContext : DbContext
     {
         public ProductContext() : base(nameOrConnectionString: "name=RentCars") //конструктор 

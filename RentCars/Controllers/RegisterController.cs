@@ -10,7 +10,7 @@ using System.Linq;
 
 public class RegisterController : Controller
 {
-    private readonly IRegister _register;
+    private readonly IRegister _register; //вся моя логика регистрация
 
     public RegisterController()
     {
@@ -27,7 +27,7 @@ public class RegisterController : Controller
     [HttpPost]
     public ActionResult Register(RegisterViewModel model)
     {
-        if (ModelState.IsValid)
+        if (ModelState.IsValid) // проверка если вся форма заполнена правильно
         {
             // Проверяем, нет ли уже пользователя с таким именем в базе данных
             if (_register.IsUserNameTaken(model.UserName))

@@ -24,20 +24,6 @@ namespace RentCars.Controllers
             return View();
         }
 
-        public ActionResult Car()
-        {
-            
-            Car car = new Car();
-            car.Name = "WWW";
-            car.Cars = new List<string> { "Grand Sedan Cheverolet", "Range Rover Subaru", "Mercedes Grand Sedan Cheverolet" };
-            return View(car);
-        }
-        [HttpPost]
-        public ActionResult Car(string btn)
-        {
-            return RedirectToAction("CarSingle", "Home", new {@p = btn});
-
-        }
 
         public ActionResult Contact()
         {

@@ -284,6 +284,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
+    <Compile Include="Controllers\CarsAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -291,7 +292,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cars.cs" />
+    <Compile Include="Models\CarProductModel.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\DaysData.cs" />
     <Compile Include="Models\LoginData.cs" />
@@ -439,7 +440,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_LayoutNavFooter.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
-    <Content Include="Views\Home\Car.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Pricing.cshtml" />
     <Content Include="Views\Home\Services.cshtml" />
@@ -449,6 +449,8 @@
     <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Product\Calculation.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\CarsAdmin\CarsAdmin.cshtml" />
+    <Content Include="Views\CarsAdmin\AddCar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

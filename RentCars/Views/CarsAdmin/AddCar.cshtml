@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Add Car";
+    Layout = "~/Views/Shared/_LayoutNavFooter.cshtml";
+}
+
+@model RentCars.Models.CarProductModel
+
+<style>
+    .addcar-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .addcar-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .addcar-form input[type="text"],
+        .addcar-form input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            border-radius: 3px;
+        }
+
+        .addcar-form button[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+            .addcar-form button[type="submit"]:hover {
+                background-color: #333;
+            }
+
+    /* Стили для центрирования текста над таблицей */
+    .center-text {
+        text-align: center;
+        margin-top: 150px; /* Отступ вверху */
+        margin-bottom: 20px; /* Отступ снизу */
+    }
+</style>
+
+<div class="center-text">
+    <h2>Add New Car</h2>
+</div>
+
+<form class="addcar-form" asp-controller="CarsAdmin" asp-action="AddCar" method="post">
+    <div>
+        <label asp-for="ProductName">Car Name:</label>
+        <input type="text" asp-for="ProductName" name="ProductName" />
+        <span asp-validation-for="ProductName"></span>
+    </div>
+    <div>
+        <label asp-for="ProductPrice">Car Price:</label>
+        <input type="number" asp-for="ProductPrice" name="ProductPrice" />
+        <span asp-validation-for="ProductPrice"></span>
+    </div>
+    <div>
+        <label asp-for="ProductBrand">Car Brand:</label>
+        <input type="text" asp-for="ProductBrand" name="ProductBrand" />
+        <span asp-validation-for="ProductBrand"></span>
+    </div>
+    <div>
+        <label asp-for="ProductYear">Car Year:</label>
+        <input type="number" asp-for="ProductYear" name="ProductYear" />
+        <span asp-validation-for="ProductYear"></span>
+    </div>
+    <button type="submit">Add New Car</button>
+</form>
