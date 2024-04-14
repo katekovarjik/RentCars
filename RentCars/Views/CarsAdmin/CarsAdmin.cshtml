@@ -1,31 +1,45 @@
-﻿
+﻿@model List<RentCars.Domain.Entities.Product.DB.ProductDbTable>
+
 @{
     ViewBag.Title = "Car";
     Layout = "~/Views/Shared/_LayoutNavFooter.cshtml";
 }
+<div style="margin-top: 150px; margin-right: 50px; margin-left: 100px;">
+    <h1>List of Cars</h1>
 
-@model List<RentCars.Domain.Entities.Product.DB.ProductDbTable>
+    <div style="margin-bottom: 50px;">
+        <a href="@Url.Action("AddCar", "CarsAdmin")" class="btn btn-primary">Add Car</a>
+    </div>
 
-<h1>List of Cars</h1>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Year</th>
-            <th>Price</th>
-            <th>Brand</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var car in Model)
-        {
-            <tr>
-                <td>@car.Brand</td>
-                <td>@car.Name</td>
-                <td>@car.Year</td>
-                <td>@car.Price</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Actions</th> <!-- Новый столбец для кнопки "Удалить" -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var car in Model)
+                {
+                    <tr>
+                        <td>@car.Name</td>
+                        <td>@car.Year</td>
+                        <td>$@car.Price</td>
+                        <td>@car.Brand</td>
+                        <td>
+                            <!-- Форма для отправки POST-запроса на удаление -->
+                            <form method="post" action="@Url.Action("DeleteCar", "CarsAdmin")">
+                                <input type="hidden" name="carId" value="@car.Id" />
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

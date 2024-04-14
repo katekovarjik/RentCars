@@ -17,7 +17,6 @@ namespace RentCars.Controllers
     {
 
         private readonly IAddCar _addcar;
-        private readonly ProductContext _productcontext;
 
         public CarsAdminController() 
         {
@@ -25,12 +24,6 @@ namespace RentCars.Controllers
             _addcar = logicBl.GetAddCarBL();
         }
         
-
-        public CarsAdminController(ProductContext productcontext)
-        {
-            _productcontext = productcontext;
-        }
-
 
         // GET: CarsAdmin
         public ActionResult CarsAdmin()
@@ -44,7 +37,24 @@ namespace RentCars.Controllers
 
             return View(cars);
         }
-    
+
+        [HttpPost]
+        public ActionResult DeleteCar(int carId)
+        {
+            using (var dbContext = new ProductContext())
+            {
+                var carToDelete = dbContext.Products.FirstOrDefault(c => c.Id == carId);
+                if (carToDelete != null)
+                {
+                    dbContext.Products.Remove(carToDelete);
+                    dbContext.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("CarsAdmin"); // Перенаправление на страницу со списком товаров после удаления
+        }
+
+
 
 
 
@@ -72,7 +82,7 @@ namespace RentCars.Controllers
 
                 _addcar.CreateNewProduct(CarInfo);
                 // Перенаправляем пользователя на страницу входа после успешной регистрации
-                return RedirectToAction("LogIn", "Login");
+                return RedirectToAction("CarsAdmin", "CarsAdmin");
             }
 
             // Если модель не валидна, возвращаем представление с ошибками
