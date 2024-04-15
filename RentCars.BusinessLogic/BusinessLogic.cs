@@ -33,6 +33,10 @@ namespace RentCars.BusinessLogic
         {
             return new AddCarBL();
         }
+        public IPricing GetPricingBL()
+        {
+            return new PricingBL();
+        }
     }
 
 }

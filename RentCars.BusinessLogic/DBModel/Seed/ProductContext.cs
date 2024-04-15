@@ -19,6 +19,6 @@ namespace RentCars.BusinessLogic.DBModel.Seed
 
         }
 
-        public virtual DbSet<ProductDBTable> Products { get; set; }
+        public virtual DbSet<ProductDbTable> Products { get; set; }
     }
 }

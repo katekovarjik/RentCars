@@ -5,7 +5,24 @@
     Layout = "~/Views/Shared/_LayoutNavFooter.cshtml";
 }
 @model List<RentCars.Models.CarProductModel>
+<style>
+    .input-group.mb-3 .btn:hover {
+        background-color: #ffffff; /* Цвет фона при наведении */
+        border-color: #ced4da; /* Цвет границы при наведении */
+    }
+    .btn-outline-primary:hover {
+        color: #fff; /* Цвет текста при наведении */
+        background-color: #007bff; /* Цвет фона при наведении */
+        border-color: #007bff; /* Цвет границы при наведении */
+    }
+    .btn-outline-primary {
+        border-color: #007bff; /* Цвет контура */
+    }
 
+
+
+
+</style>
 <div class="content">
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -18,7 +35,7 @@
             </div>
         </div>
     </section>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <section class="ftco-section ftco-cart">
         <div class="container">
             <div class="row">
@@ -48,8 +65,19 @@
                                         </div>
                                     </div>
 
+
                                 }
-                               
+                                <div class="input-group mb-3">
+                                    <input type="text"  placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button  btn-sm float-right dropdown-toggle" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+
+                                    </di v>
+                                </div>
+
+
 
 
                                 @foreach (var car in Model)
@@ -62,6 +90,7 @@
                                         </td>
                                         <td class="product-name">
                                             <h3>@car.ProductName</h3>
+                                            <h5>@car.ProductBrand</h5>
                                             <p class="mb-0 rated">
                                                 <span>rated:</span>
                                                 <span class="ion-ios-star"></span>

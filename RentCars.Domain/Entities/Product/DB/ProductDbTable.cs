@@ -28,6 +28,8 @@ namespace RentCars.Domain.Entities.Product.DB
         [Required]
         public int Year { get; set; }
 
+        public string Image {  get; set; } 
+
 
     }
 }

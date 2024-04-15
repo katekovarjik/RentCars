@@ -29,7 +29,12 @@ namespace RentCars.BusinessLogic.MainBL
             else 
                 return SortCars();
         }
-        
+        public List<CarProductData> GetAllCars()
+        {
+            return GetCars();
+        }
+
+
 
 
 
