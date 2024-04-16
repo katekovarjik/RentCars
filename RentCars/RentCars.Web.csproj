@@ -285,6 +285,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\CarsAdminController.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
@@ -447,6 +448,7 @@
     <Content Include="Views\CarsAdmin\CarsAdmin.cshtml" />
     <Content Include="Views\CarsAdmin\AddCar.cshtml" />
     <Content Include="Views\Pricing\Pricing.cshtml" />
+    <Content Include="Views\Cars\Cars.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

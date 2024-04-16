@@ -1,4 +1,6 @@
-﻿using RentCars.Models;
+﻿using RentCars.BusinessLogic.DBModel.Seed;
+using RentCars.Domain.Entities.Product.DB;
+using RentCars.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +46,22 @@ namespace RentCars.Controllers
         {
             return View();
         }
+        /*public ActionResult Cars()
+        {
+            return View();
+        }*/
+
+        /* public ActionResult Cars()
+         {
+             List<ProductDbTable> cars;
+
+             using (var dbContext = new ProductContext())
+             {
+                 cars = dbContext.Products.ToList();
+             }
+
+             return View(cars);
+         }*/
 
         public ActionResult Services()
         {
