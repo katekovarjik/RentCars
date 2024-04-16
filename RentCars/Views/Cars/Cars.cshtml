@@ -20,40 +20,36 @@
     </section>
 
 
-
+   
+    <div class="input-group mb-3">
+        @using (Html.BeginForm("SearchCar", "Cars", FormMethod.Post))
+        {
+            <div class="input-group mb-3">
+                <input type="text" name="productBrand" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        }
+        </div>
 
     <section class="ftco-section bg-light">
         <div class="container">
             <div class="row">
 
-                <div class="col-md-4">
-                    <div class="car-wrap rounded ftco-animate">
-                        <div class="img rounded d-flex align-items-end" style="background-image: url('/images/car-5.jpg');">
-                        </div>
-                        <div class="text">
-                            <h2 class="mb-0"><a href="CarSingle">____</a></h2>
-                            <div class="d-flex mb-3">
-                                <span class="cat">Subaru</span>
-                                <p class="price ml-auto">$500 <span>/day</span></p>
-                            </div>
-                            <p class="d-flex mb-0 d-block">
-                                <a href="#" class="btn btn-primary py-2 mr-1">Book now</a>
-                                <a href="CarSingle" class="btn btn-secondary py-2 ml-1">Details</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
                 @foreach (var car in Model)
                 {
                     <div class="col-md-4">
                         <div class="car-wrap rounded ftco-animate">
-                            <div class="img rounded d-flex align-items-end" style="background-image: url('/images/car-3.jpg');">
+                            <div class="img rounded d-flex align-items-end" style="background-image: url('/images/car-6.jpg');">
                             </div>
                             <div class="text">
                                 <h2 class="mb-0"><a href="CarSingle">@car.Name</a></h2>
                                 <div class="d-flex mb-3">
-                                    <span class="cat">Cheverolet</span>
-                                    <p class="price ml-auto">$500 <span>/day</span></p>
+                                    <span class="cat">@car.Brand</span>
+                                    <p class="price ml-auto">@car.Price $ <span>/day</span></p>
                                 </div>
                                 <p class="d-flex mb-0 d-block">
                                     <a href="#" class="btn btn-primary py-2 mr-1">Book now</a>
@@ -65,7 +61,7 @@
                 }
 
 
-                </div>
+            </div>
 
             <div class="row mt-5">
                 <div class="col text-center">

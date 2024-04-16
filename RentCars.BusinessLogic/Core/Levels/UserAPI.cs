@@ -155,5 +155,29 @@ namespace RentCars.BusinessLogic.Core.Levels
         }
 
 
+        // Search Car
+        public List<CarProductData> Search()
+        {
+            using (var dbContext = new ProductContext())
+            {
+                // Получаем все машины из базы данных и сортируем их по бренду
+                var searchedCars = dbContext.Products
+                    .OrderBy(car => car.Brand)
+                    .Select(car => new CarProductData
+                    {
+                        ProductName = car.Name,
+                        ProductPrice = car.Price,
+                        ProductBrand = car.Brand,
+                        ProductYear = car.Year,
+                        Image = car.Image
+                    })
+                    .ToList();
+
+                return searchedCars;
+            }
+        }
+
+
+
     }
 }

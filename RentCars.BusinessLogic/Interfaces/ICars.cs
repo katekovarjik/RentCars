@@ -9,6 +9,6 @@ namespace RentCars.BusinessLogic.Interfaces
 {
     public interface ICars
     {
-        List<CarProductData> GetAllCars();
+        
     }
 }

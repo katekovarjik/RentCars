@@ -12,17 +12,38 @@ namespace RentCars.Controllers
     public class CarsController : Controller
     {
         // GET: Cars
-        public ActionResult Cars()
+        public ActionResult Cars(string productBrand)
         {
             List<ProductDbTable> cars;
-
-            using (var dbContext = new ProductContext())
+            if(productBrand == null)
             {
-                cars = dbContext.Products.ToList();
+                using (var dbContext = new ProductContext())
+                {
+                    cars = dbContext.Products.ToList();
+                }
+                return View(cars);
             }
 
-            return View(cars);
+            else
+            {
+                using (var dbContext = new ProductContext())
+                {
+                    var carsByBrand = dbContext.Products
+                        .Where(car => car.Brand == productBrand)
+                        .ToList();
+                
+                    return View(carsByBrand);
+                }
+            }
+
+            
         }
+        [HttpPost]
+        public ActionResult SearchCar(string productBrand)
+        {
+            return RedirectToAction("Cars", new { productBrand });
+        }
+       
 
     }
 }

@@ -22,10 +22,7 @@ namespace RentCars.BusinessLogic.MainBL
         {
             _productcontext = productcontext;
         }
-        public List<CarProductData> GetAllCars()
-        {
-            return GetCars();
-        }
+        
 
     }
 }
