@@ -7,7 +7,9 @@ using RentCars.Domain.Enum.Roles;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -147,7 +149,7 @@ namespace RentCars.BusinessLogic.Core.Levels
                 Name= NewUser.UserName,
                 UserName = NewUser.UserName,
                 Email = NewUser.Email,
-                Password = NewUser.Password,
+                Password = EncryptPassword(NewUser.Password,NewUser.Email),
                 LastLogin = DateTime.Now,
                 LastIp = NewUser.IP,
                 Level = URole.User,
@@ -159,6 +161,40 @@ namespace RentCars.BusinessLogic.Core.Levels
                 DbContext.SaveChanges();
 
 
+            }
+        }
+        public static string EncryptPassword(string password, string login)
+        {
+            // Преобразуем логин в массив байт
+            byte[] loginBytes = Encoding.UTF8.GetBytes(login);
+
+            // Создаем экземпляр класса HMACSHA256 для создания ключа из логина
+            using (HMACSHA256 hmac = new HMACSHA256(loginBytes))
+            {
+                // Получаем ключ из логина
+                byte[] key = hmac.ComputeHash(loginBytes);
+
+                using (AesManaged aes = new AesManaged())
+                {
+                    aes.Key = key;
+                    ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                    using (MemoryStream msEncrypt = new MemoryStream())
+                    {
+                        using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                        {
+                            using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                            {
+                                swEncrypt.Write(password);
+                            }
+                        }
+
+                        byte[] encryptedBytes = msEncrypt.ToArray();
+
+                        // Возвращаем зашифрованный пароль в виде Base64 строки
+                        return Convert.ToBase64String(encryptedBytes);
+                    }
+                }
             }
         }
 
