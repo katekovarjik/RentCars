@@ -43,7 +43,12 @@ namespace RentCars.Controllers
         {
             return RedirectToAction("Cars", new { productBrand });
         }
-       
+        //[HttpGet]
+        //public ActionResult SingleCar(int id)
+        //{
+        //    return RedirectToAction("SingleCar", new { id });
+        //}
+
 
     }
 }

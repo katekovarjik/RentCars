@@ -6,6 +6,7 @@ using RentCars.Domain.Entities.User;
 using RentCars.Domain.Enum.Roles;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,7 +113,14 @@ namespace RentCars.BusinessLogic.Core.Levels
 
             return sortedCars;
         }
+        //_________________
+        public ProductDbTable GetCar(int id)
+        {
+            var DbContext = new ProductContext();
+            var car = DbContext.Products.FirstOrDefault(p => p.Id == id);
 
+            return car;
+        }
 
 
 

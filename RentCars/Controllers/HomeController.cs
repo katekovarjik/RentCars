@@ -46,23 +46,11 @@ namespace RentCars.Controllers
         {
             return View();
         }
-        /*public ActionResult Cars()
+        
+        /*public ActionResult SingleCar()
         {
             return View();
         }*/
-
-        /* public ActionResult Cars()
-         {
-             List<ProductDbTable> cars;
-
-             using (var dbContext = new ProductContext())
-             {
-                 cars = dbContext.Products.ToList();
-             }
-
-             return View(cars);
-         }*/
-
         public ActionResult Services()
         {
             return View();
@@ -72,10 +60,7 @@ namespace RentCars.Controllers
         {
             return View();
         }
-        public ActionResult CarSingle()
-        {
-            return View();
-        }
+       
 
       
     }

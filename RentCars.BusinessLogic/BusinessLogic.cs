@@ -15,10 +15,6 @@ namespace RentCars.BusinessLogic
         {
             return new SessionBL();
         }
-        public IProduct GetProductBL()
-        {
-            return new ProductBl();
-        }
         public ICalculation GetCalculationBL()
         {
             return new CalculationBL();
@@ -40,6 +36,10 @@ namespace RentCars.BusinessLogic
         public ICars GetCarsBL()
         {
             return new CarsBL();
+        }
+        public ISingleCar GetSingleCarBL()
+        {
+            return new SingleCarBL();
         }
     }
 

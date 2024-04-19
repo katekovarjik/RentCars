@@ -290,6 +290,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SingleCarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -442,13 +443,13 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Services.cshtml" />
     <Content Include="Views\Home\BlogSingle.cshtml" />
-    <Content Include="Views\Home\CarSingle.cshtml" />
     <Content Include="Views\Login\LogIn.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\CarsAdmin\CarsAdmin.cshtml" />
     <Content Include="Views\CarsAdmin\AddCar.cshtml" />
     <Content Include="Views\Pricing\Pricing.cshtml" />
     <Content Include="Views\Cars\Cars.cshtml" />
+    <Content Include="Views\SingleCar\SingleCar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

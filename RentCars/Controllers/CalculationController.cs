@@ -29,7 +29,7 @@ namespace RentCars.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(DaysData data)
+        public ActionResult Calculation(DaysData data)
         {
             var calcData = new CalcDataDays();
             try
@@ -48,9 +48,12 @@ namespace RentCars.Controllers
             // Продолжайте с вашей логикой
             int response = _calculation.CalculateDays(calcData);
 
+
+
             if (response != 0)
             {
-                return RedirectToAction("Car", "Home");
+                ViewData["CalculatedDays"] = response;
+                return View();
             }
             return View();
         }

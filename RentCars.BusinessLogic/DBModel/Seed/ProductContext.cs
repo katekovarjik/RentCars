@@ -1,6 +1,5 @@
 ﻿using RentCars.Domain.Entities.Product.DB;
 using RentCars.Domain.Entities.User;
-using RentCars.Domain.Entities.User.DB;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
