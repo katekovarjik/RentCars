@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace RentCars.BusinessLogic.Core.Levels
 {
     public class UserAPI
@@ -25,25 +26,30 @@ namespace RentCars.BusinessLogic.Core.Levels
         internal RResponseData UALSessionCheck(UserLoginData data)
         {
             UDbTable user;
-
-            using (var DbContext = new UserContext()) 
-          
+            using (var DbContext = new UserContext())
             {
-                user = DbContext.Users.FirstOrDefault(u => u.Name == data.Credential && u.Password == data.Password);
+                user = DbContext.Users.FirstOrDefault(u => u.UserName == data.Credential);
             }
 
 
             // Проверка, найден ли пользователь
             if (user != null)
             {
-                // Создание объекта RResponseData с данными текущего пользователя
-                return new RResponseData {
-                    Status = true,
-                    CurrentUser = user,
+                if(VerifyPassword(user.Password, data.Password))
+                {
+                    return new RResponseData
+                    {
+                        Status = true,
+                        CurrentUser = user
                     };
+                }
+                // Создание объекта RResponseData с данными текущего пользователя
+               
             }
                 // Создание объекта RResponseData с сообщением об ошибке
-            return new RResponseData { Status = false, ResponceMessage = "Invalid credentials" };
+            return new RResponseData { 
+                Status = false, 
+                ResponceMessage = "Invalid credentials" };
             
         }
 
@@ -149,7 +155,7 @@ namespace RentCars.BusinessLogic.Core.Levels
                 Name= NewUser.UserName,
                 UserName = NewUser.UserName,
                 Email = NewUser.Email,
-                Password = EncryptPassword(NewUser.Password,NewUser.Email),
+                Password = HashPassword(NewUser.Password),
                 LastLogin = DateTime.Now,
                 LastIp = NewUser.IP,
                 Level = URole.User,
@@ -163,40 +169,34 @@ namespace RentCars.BusinessLogic.Core.Levels
 
             }
         }
-        public static string EncryptPassword(string password, string login)
+
+        public string HashPassword(string password)
         {
-            // Преобразуем логин в массив байт
-            byte[] loginBytes = Encoding.UTF8.GetBytes(login);
-
-            // Создаем экземпляр класса HMACSHA256 для создания ключа из логина
-            using (HMACSHA256 hmac = new HMACSHA256(loginBytes))
-            {
-                // Получаем ключ из логина
-                byte[] key = hmac.ComputeHash(loginBytes);
-
-                using (AesManaged aes = new AesManaged())
-                {
-                    aes.Key = key;
-                    ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-
-                    using (MemoryStream msEncrypt = new MemoryStream())
-                    {
-                        using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                        {
-                            using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                            {
-                                swEncrypt.Write(password);
-                            }
-                        }
-
-                        byte[] encryptedBytes = msEncrypt.ToArray();
-
-                        // Возвращаем зашифрованный пароль в виде Base64 строки
-                        return Convert.ToBase64String(encryptedBytes);
-                    }
-                }
-            }
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            string passwordHash = Convert.ToBase64String(hashBytes);
+            return passwordHash;
         }
+        public bool VerifyPassword(string savedPasswordHash, string passwordToCheck)
+        {
+            byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+            var pbkdf2 = new Rfc2898DeriveBytes(passwordToCheck, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            for (int i = 0; i < 20; i++)
+            {
+                if (hashBytes[i + 16] != hash[i])
+                    return false;
+            }
+            return true;
+        }
+
 
 
         // Search Car

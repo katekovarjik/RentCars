@@ -9,6 +9,7 @@ namespace RentCars.Domain.Entities.User
     public class UserLoginData   //сущность
     {
         public string Credential { get; set; }
+        public string Email {get; set; }    
         public string Password { get; set; }
         public string   IP { get; set; }
         public DateTime FirstLoginTime { get; set; }
