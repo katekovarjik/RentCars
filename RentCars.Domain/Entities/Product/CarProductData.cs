@@ -15,5 +15,6 @@ namespace RentCars.Domain.Entities.Product
         public string ProductBrand { get; set; }
 
         public int ProductYear { get; set; }    
+        public string Image { get; set; }
     }
 }

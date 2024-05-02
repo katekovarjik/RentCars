@@ -6,9 +6,13 @@ using RentCars.Domain.Entities.User;
 using RentCars.Domain.Enum.Roles;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace RentCars.BusinessLogic.Core.Levels
 {
@@ -22,25 +26,30 @@ namespace RentCars.BusinessLogic.Core.Levels
         internal RResponseData UALSessionCheck(UserLoginData data)
         {
             UDbTable user;
-
-            using (var DbContext = new UserContext()) 
-          
+            using (var DbContext = new UserContext())
             {
-                user = DbContext.Users.FirstOrDefault(u => u.Name == data.Credential && u.Password == data.Password);
+                user = DbContext.Users.FirstOrDefault(u => u.UserName == data.Credential);
             }
 
 
             // Проверка, найден ли пользователь
             if (user != null)
             {
-                // Создание объекта RResponseData с данными текущего пользователя
-                return new RResponseData {
-                    Status = true,
-                    CurrentUser = user,
+                if(VerifyPassword(user.Password, data.Password))
+                {
+                    return new RResponseData
+                    {
+                        Status = true,
+                        CurrentUser = user
                     };
+                }
+                // Создание объекта RResponseData с данными текущего пользователя
+               
             }
                 // Создание объекта RResponseData с сообщением об ошибке
-            return new RResponseData { Status = false, ResponceMessage = "Invalid credentials" };
+            return new RResponseData { 
+                Status = false, 
+                ResponceMessage = "Invalid credentials" };
             
         }
 
@@ -49,39 +58,79 @@ namespace RentCars.BusinessLogic.Core.Levels
         {
             throw new NotImplementedException();
         }
-     
 
 
 
-    //______________________
-    //products
 
-    internal ProductDataModel ProductActionGetToList()
+        //______________________
+        //Sort Cars
+        public List<CarProductData> GetCars()
         {
-            var products = new List<Product>(); // list of products from DB
-            ProductDataModel pr1 = new ProductDataModel();   // это для тренировки без бд
-            pr1.SingleProduct = new Product(); // это для тренировки без бд..инициализация объекта SingleProduct
-            pr1.SingleProduct.Name = "Let's Test";
-            //pull out products 
-            //return new ProductDataModel {Products = products };
-            return pr1;
+            var DbContext = new ProductContext();
 
-        }
-
-        internal ProductDataModel GetSingleAction(int id)
-        {
-            // select from DB where id = id
-            var product = new Product();
-            return new ProductDataModel { SingleProduct = product };
-            /*return new ProductDataModel
-            {
-                SingleProduct = new Product
+            // Получаем все машины из базы данных
+            var allCars = DbContext.Products
+                .Select(car => new CarProductData
                 {
-                    Name = "Let's Test",
-                    Price = 110
-                }
-            };*/
+                    ProductName = car.Name,
+                    ProductPrice = car.Price,
+                    ProductBrand = car.Brand,
+                    ProductYear = car.Year,
+                    Image = car.Image,
+                })
+                .ToList();
+
+            return allCars;
         }
+       
+        public List<CarProductData> SortCars()
+        {
+            var DbContext = new ProductContext();
+            // Получаем все машины из базы данных и сортируем их по возрастанию года выпуска
+            var sortedCars = DbContext.Products
+                .OrderBy(car => car.Price)
+                .Select(car => new CarProductData
+                {
+                    ProductName = car.Name,
+                    ProductPrice = car.Price,
+                    ProductBrand = car.Brand,
+                    ProductYear = car.Year,
+                    Image = car.Image,
+
+                })
+                .ToList();
+
+            return sortedCars;
+        }
+        public List<CarProductData> DescSort()
+        {
+            var DbContext = new ProductContext();
+            // Получаем все машины из базы данных и сортируем их по убыванию года выпуска
+            var sortedCars = DbContext.Products
+                .OrderByDescending(car => car.Price)
+                .Select(car => new CarProductData
+                {
+                    ProductName = car.Name,
+                    ProductPrice = car.Price,
+                    ProductBrand = car.Brand,
+                    ProductYear = car.Year,
+                    Image = car.Image,
+
+                })
+                .ToList();
+
+            return sortedCars;
+        }
+        //_________________
+        public ProductDbTable GetCar(int id)
+        {
+            var DbContext = new ProductContext();
+            var car = DbContext.Products.FirstOrDefault(p => p.Id == id);
+
+            return car;
+        }
+
+
 
 
         public bool IsUserNameExistAlready(string userName) 
@@ -106,7 +155,7 @@ namespace RentCars.BusinessLogic.Core.Levels
                 Name= NewUser.UserName,
                 UserName = NewUser.UserName,
                 Email = NewUser.Email,
-                Password = NewUser.Password,
+                Password = HashPassword(NewUser.Password),
                 LastLogin = DateTime.Now,
                 LastIp = NewUser.IP,
                 Level = URole.Admin,
@@ -120,6 +169,58 @@ namespace RentCars.BusinessLogic.Core.Levels
 
             }
         }
+
+        public string HashPassword(string password)
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            string passwordHash = Convert.ToBase64String(hashBytes);
+            return passwordHash;
+        }
+        public bool VerifyPassword(string savedPasswordHash, string passwordToCheck)
+        {
+            byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+            var pbkdf2 = new Rfc2898DeriveBytes(passwordToCheck, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            for (int i = 0; i < 20; i++)
+            {
+                if (hashBytes[i + 16] != hash[i])
+                    return false;
+            }
+            return true;
+        }
+
+
+
+        // Search Car
+        public List<CarProductData> Search()
+        {
+            using (var dbContext = new ProductContext())
+            {
+                // Получаем все машины из базы данных и сортируем их по бренду
+                var searchedCars = dbContext.Products
+                    .OrderBy(car => car.Brand)
+                    .Select(car => new CarProductData
+                    {
+                        ProductName = car.Name,
+                        ProductPrice = car.Price,
+                        ProductBrand = car.Brand,
+                        ProductYear = car.Year,
+                        Image = car.Image
+                    })
+                    .ToList();
+
+                return searchedCars;
+            }
+        }
+
 
 
     }

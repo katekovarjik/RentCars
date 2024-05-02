@@ -10,12 +10,12 @@ namespace RentCars.BusinessLogic.DBModel.Seed
 {
     public class UserContext: DbContext
     {
-        public UserContext() : base(nameOrConnectionString: "name=RentCars")
+        public UserContext() : base(nameOrConnectionString: "name=RentCars") //конструктор 
         {
             
         }
 
-
-        public virtual DbSet<UDbTable> Users { get; set; }  
+        public virtual DbSet<UDbTable> Users { get; set; }  // таблица для user
+        // добавляем модель к созданной таблице 
     }
 }

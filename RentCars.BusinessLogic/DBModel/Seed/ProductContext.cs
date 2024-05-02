@@ -13,11 +13,11 @@ namespace RentCars.BusinessLogic.DBModel.Seed
 
     public class ProductContext : DbContext
     {
-        public ProductContext() : base(nameOrConnectionString: "name=RentCars")
+        public ProductContext() : base(nameOrConnectionString: "name=RentCars") //конструктор 
         {
 
         }
 
-        public virtual DbSet <ProductDbTable> Products { get; set; }
+        public virtual DbSet<ProductDbTable> Products { get; set; }
     }
 }

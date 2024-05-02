@@ -37,6 +37,7 @@ namespace RentCars.Controllers
             var uLoginData = new UserLoginData
             {
                 Credential = data.UserName, // Получаем имя пользователя из формы входа
+
                 Password = data.Password, // Получаем пароль пользователя из формы входа
                 IP = Request.UserHostAddress, // Можно добавить IP-адрес пользователя, если необходимо
                 FirstLoginTime = DateTime.Now // Записываем текущее время как время первого входа
@@ -46,7 +47,7 @@ namespace RentCars.Controllers
             RResponseData responce = _session.UserLoginAction(uLoginData);
 
             // Проверяем, что ответ не равен null и пароль из ответа совпадает с введенным пользователем паролем
-            if (responce != null && responce.CurrentUser != null && responce.CurrentUser.Password == uLoginData.Password)
+            if (responce != null && responce.CurrentUser != null) //&& responce.CurrentUser.Password == uLoginData.Password
 
             {
                 // Если аутентификация прошла успешно, сохраняем имя пользователя в сессии

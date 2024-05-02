@@ -8,8 +8,8 @@ namespace RentCars.Domain.Entities.Calculation
 {
     public class CalcDataDays
     {
-        public decimal takeDay {  get; set; }
-        public decimal returnDay {  get; set; }
+        public DateTime takeDay {  get; set; }
+        public DateTime returnDay {  get; set; }
         public int price { get; set; }
     }
 }

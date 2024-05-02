@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace RentCars.BusinessLogic.Interfaces
 {
-    public interface IProduct
+    public interface IPricing
     {
-        ProductDataModel GetProductsToList();
-        ProductDataModel GetSingleProduct(int id); 
+        List<CarProductData> SortProducts(string SOrder); // возвращает модель с домэйна
+        List<CarProductData> GetAllCars();
     }
-
-    
 }

@@ -59,14 +59,18 @@
     <Compile Include="DBModel\Seed\UserContext.cs" />
     <Compile Include="Interfaces\IAddCar.cs" />
     <Compile Include="Interfaces\ICalculation.cs" />
-    <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Interfaces\ICars.cs" />
+    <Compile Include="Interfaces\IPricing.cs" />
     <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />
+    <Compile Include="Interfaces\ISingleCar.cs" />
     <Compile Include="MainBL\AddCarBL.cs" />
     <Compile Include="MainBL\CalculationBL.cs" />
-    <Compile Include="MainBL\ProductBl.cs" />
+    <Compile Include="MainBL\CarsBL.cs" />
+    <Compile Include="MainBL\PricingBL.cs" />
     <Compile Include="MainBL\RegisterBL.cs" />
     <Compile Include="MainBL\SessionBL.cs" />
+    <Compile Include="MainBL\SingleCarBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@ using System.Web;
 namespace RentCars.Models
 {
     public class CarProductModel
-    {        
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
@@ -20,10 +20,11 @@ namespace RentCars.Models
         public int ProductPrice { get; set; }
 
         [Required(ErrorMessage = "The ProductBrand field is required.")]
-        public string ProductBrand {  get; set; }
+        public string ProductBrand { get; set; }
 
         [Required(ErrorMessage = "The ProductYear field is required.")]
         public int ProductYear { get; set; }
+        public string ProductImage { get; set; }
 
     }
 }

@@ -1,8 +1,7 @@
 ﻿using RentCars.BusinessLogic.Core.Levels;
+using RentCars.BusinessLogic.DBModel.Seed;
 using RentCars.BusinessLogic.Interfaces;
-using RentCars.Domain.Entities.GeneralResponses;
 using RentCars.Domain.Entities.Product;
-using RentCars.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace RentCars.BusinessLogic.MainBL
 {
-    public class ProductBl : UserAPI,IProduct
+    public class CarsBL : UserAPI, ICars
     {
-        public ProductDataModel GetProductsToList()
+        private readonly ProductContext _productcontext;
+
+        public CarsBL()
         {
-            return ProductActionGetToList();
         }
 
-        public ProductDataModel GetSingleProduct(int id) 
+        public CarsBL(ProductContext productcontext)
         {
-            return GetSingleAction(id); 
+            _productcontext = productcontext;
         }
         
+
     }
 }

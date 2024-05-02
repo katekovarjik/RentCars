@@ -7,7 +7,9 @@ namespace RentCars.Models
 {
     public class DaysData
     {
-        public decimal takeDayPr { get; set; }
-        public decimal returnDayPr { get; set; }
+        public string  PickUpDate { get; set; }
+
+        public string DropOffDate { get; set; }
+
     }
 }

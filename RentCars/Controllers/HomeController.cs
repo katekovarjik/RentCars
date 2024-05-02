@@ -1,4 +1,6 @@
-﻿using RentCars.Models;
+﻿using RentCars.BusinessLogic.DBModel.Seed;
+using RentCars.Domain.Entities.Product.DB;
+using RentCars.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +46,11 @@ namespace RentCars.Controllers
         {
             return View();
         }
-
+        
+        /*public ActionResult SingleCar()
+        {
+            return View();
+        }*/
         public ActionResult Services()
         {
             return View();
@@ -54,10 +60,7 @@ namespace RentCars.Controllers
         {
             return View();
         }
-        public ActionResult CarSingle()
-        {
-            return View();
-        }
+       
 
       
     }
