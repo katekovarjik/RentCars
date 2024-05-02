@@ -283,6 +283,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attribute\AdminAuthorizeAttribute.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\CarsAdminController.cs" />
     <Compile Include="Controllers\CarsController.cs" />

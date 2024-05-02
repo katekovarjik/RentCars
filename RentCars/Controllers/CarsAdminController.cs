@@ -13,6 +13,7 @@ using RentCars.Domain.Entities.Product.DB;
 
 namespace RentCars.Controllers
 {
+
     public class CarsAdminController : Controller
     {
 
@@ -23,7 +24,7 @@ namespace RentCars.Controllers
             var logicBl = new BusinessLogic.BusinessLogic();
             _addcar = logicBl.GetAddCarBL();
         }
-        
+
 
         // GET: CarsAdmin
         public ActionResult CarsAdmin()
@@ -39,6 +40,7 @@ namespace RentCars.Controllers
         }
 
         [HttpPost]
+        [AdminAuthorize]
         public ActionResult DeleteCar(int carId)
         {
             using (var dbContext = new ProductContext())
@@ -57,13 +59,14 @@ namespace RentCars.Controllers
 
 
 
-
+        [AdminAuthorize]
         public ActionResult AddCar() 
         {
             return View();
         }
 
         [HttpPost]
+        [AdminAuthorize]
         public ActionResult AddCar(CarProductModel Model) 
         {
             if (ModelState.IsValid) // проверка если вся форма заполнена правильно

@@ -158,7 +158,7 @@ namespace RentCars.BusinessLogic.Core.Levels
                 Password = HashPassword(NewUser.Password),
                 LastLogin = DateTime.Now,
                 LastIp = NewUser.IP,
-                Level = URole.User,
+                Level = URole.Admin,
             };
 
             using (var DbContext = new UserContext())
